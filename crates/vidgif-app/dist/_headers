@@ -1,0 +1,20 @@
+# Cloudflare Pages response headers.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+
+# Files with a content hash in their name never change.
+/vidgif-app-*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Everything else must be revalidated so a new deploy is picked up immediately.
+/
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+/sw.js
+  Cache-Control: no-cache
+/worker*
+  Cache-Control: no-cache
+/manifest.json
+  Cache-Control: no-cache

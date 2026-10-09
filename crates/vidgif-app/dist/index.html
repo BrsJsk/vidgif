@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>vidgif – video to GIF in your browser</title>
+  <meta name="description" content="Convert a video to a GIF. Everything runs locally in your browser; nothing is uploaded." />
+  <meta name="theme-color" content="#e8693a" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+
+  
+<script type="module">
+import init, * as bindings from './vidgif-app-8a344bfc05381999.js';
+const wasm = await init({ module_or_path: './vidgif-app-8a344bfc05381999_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+  
+  
+  
+  
+  
+  
+  
+
+  <style>
+    html, body { margin: 0; height: 100%; background: #1b1b1b; overflow: hidden; }
+    canvas { display: block; width: 100%; height: 100%; }
+    #loading {
+      position: fixed; inset: 0; display: grid; place-items: center;
+      color: #9a9a9a; font: 16px system-ui, sans-serif;
+    }
+  </style>
+<link rel="modulepreload" href="./vidgif-app-8a344bfc05381999.js" crossorigin="anonymous" integrity="sha384-5l+P7/BJevvvGZIj/CNB4ClKG7xFCVuntThdqPXji5couk75pP0ooP36Y9Y5aK/7"><link rel="preload" href="./vidgif-app-8a344bfc05381999_bg.wasm" crossorigin="anonymous" integrity="sha384-bZSSCGlS9tsoZOhxYBW8M3OMnZ0RzgwVNptriwf4W4Op4Jd8Tkav3y8HCvEBMoce" as="fetch" type="application/wasm"></head>
+<body>
+  <canvas id="vidgif_canvas"></canvas>
+  <div id="loading">Loading…</div>
+  <script>
+    if ("serviceWorker" in navigator) {
+      addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
+    }
+  </script>
+</body>
+</html>

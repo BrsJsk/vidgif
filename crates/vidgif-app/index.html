@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>vidgif – video to GIF in your browser</title>
+  <meta name="description" content="Convert a video to a GIF. Everything runs locally in your browser; nothing is uploaded." />
+  <meta name="theme-color" content="#e8693a" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+
+  <link data-trunk rel="rust" data-bin="vidgif-app" />
+  <link data-trunk rel="rust" data-bin="worker" data-type="worker" />
+  <link data-trunk rel="copy-file" href="web/worker-loader.js" />
+  <link data-trunk rel="copy-file" href="web/manifest.json" />
+  <link data-trunk rel="copy-file" href="web/sw.js" />
+  <link data-trunk rel="copy-file" href="web/_headers" />
+  <link data-trunk rel="copy-file" href="web/icon-192.png" />
+  <link data-trunk rel="copy-file" href="web/icon-512.png" />
+
+  <style>
+    html, body { margin: 0; height: 100%; background: #1b1b1b; overflow: hidden; }
+    canvas { display: block; width: 100%; height: 100%; }
+    #loading {
+      position: fixed; inset: 0; display: grid; place-items: center;
+      color: #9a9a9a; font: 16px system-ui, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="vidgif_canvas"></canvas>
+  <div id="loading">Loading…</div>
+  <script>
+    if ("serviceWorker" in navigator) {
+      addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
+    }
+  </script>
+</body>
+</html>
